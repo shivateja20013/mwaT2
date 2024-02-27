@@ -1,436 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Short+Stack&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="game.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Short+Stack&display=swap"
+      rel="stylesheet"
+    />
 
     <title>Number or Alphabet Guessing Game</title>
-    <style>
-#image-container{
-    
-    margin-right: 150px;
-    height:500px;
-    margin-left:30px;
+  </head>
 
-    background-color:rgba(255, 255, 255, 0);
-}
-
-
-        .short-stack-regular {
-            font-family: "Short Stack", cursive;
-            font-weight: 400;
-            font-style: normal;
-        }
-
-        body {
-            font-family: "Short Stack", cursive;
-            text-align: center;
-            background-image: url("https://stickershop.line-scdn.net/sticonshop/v1/product/5add4dbc040ab14a7b11d14c/iPhone/main.png?v=4");
-            background-color: white;
-        }
-
-        #game-container {
-            margin-top: 150px;
-            background-color: rgb(200, 231, 241);
-            border: red 10px solid;
-            border-radius: 5px;
-            width: 400px;
-            height: auto;
-            margin: auto;
-            padding: 15px;
-        }
-
-        #score {
-            font-size: 24px;
-            margin-top: 150px;
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: none;
-            background: radial-gradient(white, rgb(49, 211, 236));
-            border: brown 10px solid;
-            border-radius: 10px;
-            width: 200px;
-            padding: 30px;
-        }
-
-        #question {
-            font-size: 36px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        #answer {
-            font-size: 18px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        #result {
-            font-size: 24px;
-            margin-bottom: 20px;
-            animation: enlarge 3s ease-out;
-        }
-
-        @keyframes fallAndFade {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-        }
-
-        @keyframes heart-fall {
-            0% {
-                transform: translateY(-600px);
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-            100% {
-                transform: translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        .heart-broken {
-            animation: heart-fall 3s linear;
-            position: absolute;
-            font-size: 25vh;
-            color: red;
-        }
-
-        @keyframes enlarge {
-            0% {
-                transform: scale(0);
-            }
-
-            25%,
-            75% {
-                transform: scale(2);
-            }
-
-            50%,
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        #start-btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-        }
-
-        #play-btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: aqua;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .circle {
-            display: none;
-            width: 150px;
-            height: 150px;
-            font-size: 64px;
-            line-height: 150px;
-            text-align: center;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-    </style>
-</head>
-
-<body>
-    <br><br><br><br>
+  <body>
+    <br /><br /><br /><br />
 
     <div id="game-container">
-        <img id="sadimg" src="https://pngfre.com/wp-content/uploads/doraemon-png-image-from-pngfre-22.png"
-            style="display: none;background-color: rgba(255,255,255,0)">
-        <BR><BR>
-        <div id="result"></div>
+      <img
+        id="sadimg"
+        src="https://pngfre.com/wp-content/uploads/doraemon-png-image-from-pngfre-22.png"
+        style="display: none; background-color: rgba(255, 255, 255, 0)"
+      />
+      <br /><br />
+      <div id="result"></div>
 
-        <button id="start-btn" style="display: none;">Start Game</button>
+      <button id="start-btn" style="display: none">Start Game</button>
 
-        <img src="https://www.freepnglogos.com/uploads/doraemon-png/doraemon-character-free-download-8.png"
-            id="start-img" style="height: 300px">
-        <button id="play-btn" class="short-stack-regular">Play Game</button>
-        <div id="score" class="short-stack-regular">Score: 0</div>
+      <img
+        src="https://www.freepnglogos.com/uploads/doraemon-png/doraemon-character-free-download-8.png"
+        id="start-img"
+        style="height: 300px"
+      />
+      <button id="play-btn" class="short-stack-regular">Play Game</button>
+      <div id="score" class="short-stack-regular">Score: 0</div>
 
-        <br><br>
-        <div id="question" class="short-stack-regular">Guess the number or alphabet:</div>
-        <div id="char-circle" class="circle"></div>
-        <br><br>
-        <input type="text" id="answer" placeholder="Enter your answer">
-        <br><br>
-
+      <br /><br />
+      <div id="question" class="short-stack-regular">
+        Guess the number or alphabet:
+      </div>
+      <div id="char-circle" class="circle"></div>
+      <br /><br />
+      <input type="text" id="answer" placeholder="Enter your answer" />
+      <br /><br />
     </div>
-    <br>
-    <div id="image-container"
-        style="position: absolute; margin-top:auto;top: 0; right: 0;height: 500px; background-color: rgba(255, 255, 255, 0); "></div>
+    <br />
+    <div
+      id="image-container"
+      style="
+        position: absolute;
+        margin-top: auto;
+        top: 0;
+        right: 0;
+        height: 500px;
+        background-color: rgba(255, 255, 255, 0);
+      "
+    ></div>
 
-    <script>
-        const images = [
-        'https://pngfre.com/wp-content/uploads/doraemon-png-image-from-pngfre-40.png',
-"https://www.freepnglogos.com/uploads/doraemon-png/cartoon-characters-girl-doraemon-new-png-images-1.png",
-"https://www.freepnglogos.com/uploads/doraemon-png/pink-dress-girl-cartoon-characters-doraemon-26.png",
-        "https://pngfre.com/wp-content/uploads/doraemon-png-image-from-pngfre-37.png",
-'https://upload.wikimedia.org/wikipedia/en/3/3f/NobitaNobi.png',
-'https://www.freepnglogos.com/uploads/doraemon-png/cartoon-characters-doraemon-girl-hello-18.png',  
-"https://pngfre.com/wp-content/uploads/nobita-nobi-41-222x300.png",
-"https://upload.wikimedia.org/wikipedia/en/9/95/Suneo_Honekawa.png",          // Add more image URLs as needed
-        ];
-
-
-        let h = "❤️️❤️️❤️️";
-        let lives = 3;
-
-        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let score = 0;
-        let timer;
-        let i = 0;
-        let start_img = document.getElementById("start-img");
-        let wrong = 1;
-
-        function startGame() {
-            updateLivesDisplay();
-            start_img.style.display = "none";
-            for (i = 0; i < 15; i++) {
-                displayScore();
-                displayQuestion();
-                document.getElementById("sadimg").style.display = 'none';
-            }
-        }
-
-
-        function displayQuestion() {
-            var random = images[Math.floor(Math.random() * images.length)];
-            let image_container = document.getElementById("image-container");
-            image_container.innerHTML = `<img src="${random}" style="height:500px ; margin-left:30px" >`;
-            const question = document.getElementById('question');
-            const charCircle = document.getElementById('char-circle');
-
-            const randomLetter = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            question.textContent = "Guess the alphabet:";
-            charCircle.style.color = "white";
-            charCircle.textContent = randomLetter;
-            start_img.style.display = "none";
-
-            document.getElementById("sadimg").style.display = 'none';
-
-            charCircle.style.backgroundColor = getRandomColor();
-            charCircle.style.display = 'inline-block';
-
-            document.getElementById('answer').value = '';
-            document.getElementById('result').textContent = '';
-
-            document.getElementById('answer').style.display = 'inline-block';
-            document.getElementById('question').style.display = 'block';
-
-            clearTimeout(timer);
-            timer = setTimeout(displayQuestion, 3000); // Next question after 3 seconds
-        }
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
-        }
-
-        document.getElementById('play-btn').addEventListener('click', function () {
-            score = 0;
-            displayScore();
-            displayQuestion();
-            document.getElementById("sadimg").style.display = 'none';
-
-            document.getElementById('play-btn').style.display = 'none';
-        });
-
-        document.getElementById('answer').addEventListener('keyup', function (event) {
-            if (event.key === 'Enter') {
-                checkAnswer();
-            }
-        });
-
-        function checkAnswer() {
-            const answer = document.getElementById('answer').value.trim().toUpperCase();
-            const questionText = document.getElementById('question').textContent;
-
-            if (questionText.includes('number')) {
-                if (!isNaN(answer)) {
-                    const num = parseInt(answer, 10);
-                    if (num === parseInt(document.getElementById('char-circle').textContent, 10)) {
-                        score++;
-                        displayScore();
-                        displayResult('Hurray! Correct!');
-                    } else {
-                        displayResult("Oops Wrong!!");
-
-                        endGame();
-                        removeHeart();
-                    }
-                } else {
-                    displayResult("Oops Wrong!!");
-
-                    endGame();
-                    removeHeart();
-                }
-            } else {
-                if (answer.length > 0 && alphabet.includes(answer)) {
-                    const letter = document.getElementById('char-circle').textContent;
-                    if (answer === letter) {
-                        score++;
-                        displayScore();
-                        displayResult('Hurray! Correct!');
-                    } else {
-                        displayResult("Oops Wrong!!");
-
-                        endGame();
-                        removeHeart();
-                    }
-                } else {
-                    displayResult("Oops Wrong!!");
-                    endGame();
-                    removeHeart();
-
-                }
-            }
-        }
-
-        function displayResult(message) {
-            const resultElement = document.getElementById('result');
-            resultElement.textContent = message;
-            resultElement.style.display = 'block';
-            resultElement.classList.add('enlarge');
-
-            if (message === 'Hurray! Correct!') {
-                // Trigger confetti animation
-                resultElement.style.color = 'black'; // Set text color to red
-
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-            }
-            if (message === "Oops Wrong!!") {
-                resultElement.style.color = 'red'; // Set text color to red
-
-                // Create a broken heart element
-                const heart = document.createElement('span');
-                heart.classList.add('heart-broken');
-                heart.textContent = '💔'; // Unicode for the heart symbol
-                heart.style.left = resultElement.getBoundingClientRect().left + 'px'; // Position the heart to the left of the result element
-                document.body.appendChild(heart); // Append to body
-
-                // Animate the heart to fall and fade away
-                setTimeout(() => {
-                    heart.style.transform = 'translateY(100vh)';
-                    heart.style.opacity = '0';
-                }, 100);
-
-                setTimeout(() => {
-                    heart.remove(); // Remove the heart after the animation
-                }, 2000);
-            }
-
-            setTimeout(() => {
-                resultElement.classList.remove('enlarge');
-                // Set text color to black
-            }, 300);
-        }
-
-
-        function endGame() {
-            lives--;
-            if (lives === 0) {
-                clearTimeout(timer);
-                document.getElementById('result').textContent = 'Game Over. Click Play Game to play again.';
-                document.getElementById("sadimg").style.display = 'inline';
-                document.getElementById('play-btn').style.display = 'inline-block';
-                document.getElementById('start-btn').style.display = 'none';
-                document.getElementById('score').style.display = 'none';
-                document.getElementById('question').style.display = 'none';
-                document.getElementById('char-circle').style.display = 'none';
-                document.getElementById('answer').style.display = 'none';
-            } else if (lives === 1) {
-                h = "❤️️💔💔";
-                document.getElementById('score').innerHTML = `Score: ${score} <br> ${h}`;
-
-            } else if (lives === 2) {
-                h = "❤️️❤️️💔";
-                document.getElementById('score').innerHTML = `Score: ${score} <br> ${h}`;
-
-            } else {
-
-            }
-
-        }
-
-        function displayScore() {
-            document.getElementById('score').innerHTML = `Score: ${score} <br> ${h}`;
-            document.getElementById('score').style.display = 'block';
-        }
-
-        function removeHeart() {
-            if (lives > 0) {
-                const heartContainer = document.getElementById('heart-container');
-                const heart = heartContainer.lastChild;
-
-                // Apply animation
-                heart.style.animation = 'fallAndFade 1s forwards';
-
-                // Remove heart after animation ends
-                setTimeout(() => {
-                    heartContainer.removeChild(heart);
-                }, 1000);
-
-                lives--;
-            }
-
-            // End the game if no lives left
-            if (lives === 0) {
-                endGame();
-                h='❤️️❤️️❤️️';
-            }
-        }
-
-    </script>
-</body>
-
+    <script src="game.js"></script>
+  </body>
 </html>
