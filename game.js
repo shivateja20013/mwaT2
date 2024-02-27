@@ -11,7 +11,6 @@ const images = [
 
 let h = "❤️️❤️️❤️️";
 let lives = 3;
-
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let score = 0;
 let timer;
@@ -22,11 +21,11 @@ let wrong = 1;
 function startGame() {
   updateLivesDisplay();
   start_img.style.display = "none";
-  for (i = 0; i < 15; i++) {
-    displayScore();
-    displayQuestion();
-    document.getElementById("sadimg").style.display = "none";
-  }
+
+  displayScore();
+  displayQuestion();
+  document.getElementById("sadimg").style.display = "none";
+  document.getElementById("image-container").style.display = "inline";
 }
 
 function displayQuestion() {
@@ -115,6 +114,10 @@ function checkAnswer() {
         score++;
         displayScore();
         displayResult("Hurray! Correct!");
+        if (score == 15) {
+          alert("You Completed the game👏, Click ok to restart!!");
+          window.location.href = "game.html";
+        }
       } else {
         displayResult("Oops Wrong!!");
 
@@ -179,6 +182,7 @@ function endGame() {
     document.getElementById("question").style.display = "none";
     document.getElementById("char-circle").style.display = "none";
     document.getElementById("answer").style.display = "none";
+    document.getElementById("image-container").style.display = "none";
   } else if (lives === 1) {
     h = "❤️️💔💔";
     document.getElementById("score").innerHTML = `Score: ${score} <br> ${h}`;
@@ -195,16 +199,6 @@ function displayScore() {
 }
 
 function removeHeart() {
-  if (lives > 0) {
-    const heartContainer = document.getElementById("heart-container");
-    const heart = heartContainer.lastChild;
-    heart.style.animation = "fallAndFade 1s forwards";
-    setTimeout(() => {
-      heartContainer.removeChild(heart);
-    }, 1000);
-
-    lives--;
-  }
   if (lives === 0) {
     endGame();
     h = "❤️️❤️️❤️️";
